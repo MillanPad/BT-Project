@@ -1,23 +1,14 @@
 import bluetooth
-import configparser
 import classofdevice
-
+import subprocess
 
 def updateName(address,name,cod):
-    socket = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
-    socket.connect((address, 1))
-    # Abrir el archivo de configuración
-    config = configparser.ConfigParser()
-    config.read('/etc/bluetooth/main.conf')
-
+    bluetooth.set_l2cap_name(name)
     # Cambiar el CoD a "Miscellaneous" (valor hexadecimal: 0x000000)
-    config['General']['Class'] = classofdevice.cod_to_hex('Audio/Video', 'Headphones')
+    bluetooth.set_l2cap_class(classofdevice.cod_to_hex(cod_name=cod))
+
+    subprocess.run(['bdaddr','-i','hci0','00:01:E3:64:DD:9B'])
 
 
     # Guardar el archivo de configuración
-    with open('/etc/bluetooth/main.conf', 'w') as configfile:
-        config.write(configfile)
-
-    socket.send(f"AT+NAME{str(name)}\r\n".encode())
-    socket.send(f"AT+ADDR{str(address)}\r\n".encode())
-    socket.close()
+    
