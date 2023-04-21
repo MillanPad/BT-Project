@@ -1,30 +1,11 @@
-#
-# Released as open source by NCC Group Plc - http://www.nccgroup.com/
-#
-# Developed by Sultan Qasim Khan, Sultan.QasimKhan@nccgroup.trust
-#
-# http://www.github.com/nccgroup/nOBEX
-#
-# Released under GPLv3, a full copy of which can be found in COPYING.
-#
+
 
 from nOBEX.client import Client
 from nOBEX.bluez_helper import find_service
 from nOBEX import headers
 
 class FTPClient(Client):
-    """FTPClient(Client)
 
-    Provides an OBEX client that can be used to browse directories on a
-    server via a folder-browsing service (File Transfer Profile).
-
-    The address used is a standard six-field bluetooth address, and the port
-    should correspond to the port providing the folder-browsing service.
-
-    To determine the correct port, examine the advertised services for a
-    device by calling the nOBEX.bluez_helper.find_service() function with the
-    service name and address of the device as arguments.
-    """
 
     def __init__(self, address, port=None):
         if port is None:
@@ -36,11 +17,7 @@ class FTPClient(Client):
         super(FTPClient, self).connect(header_list = [headers.Target(uuid)])
 
     def capability(self):
-        """capability(self)
 
-        Returns a capability object from the server. An exception will pass
-        through if there is an error.
-        """
 
         hdrs, data = self.get(header_list=[headers.Type(b"x-obex/capability")])
         return data
