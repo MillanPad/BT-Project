@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QTextEdit, QPushButton, QTabWidget, QLabel, QLineEdit, QListWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QTextEdit, QPushButton, QComboBox,QTabWidget, QLabel, QLineEdit, QListWidget
 from bluetooth import *
 import subprocess
 from pprint import pprint
@@ -54,12 +54,18 @@ class BluetoothConfigurator(QWidget):
         self.address_entry = QLineEdit()
         bluetooth_layout.addWidget(self.address_entry)
 
-        class_label = QLabel("Class of Device:")
-        bluetooth_layout.addWidget(class_label)
+        self.cod_major_combo_box = QComboBox()
+        # Agrega los posibles CoD Major a la lista desplegable
+        self.cod_major_combo_box.addItems(['Miscellaneous','Computer','Phone','LAN/Network Access point','Audio/Video','Peripheral','Imaging','Wearable','Toy','Health','Uncategorized'])
+
+        bluetooth_layout.addWidget(self.cod_major_combo_box)
+
+        classm_label = QLabel("Class of Device(Minor):")
+        bluetooth_layout.addWidget(classm_label)
         
 
-        self.class_entry = QLineEdit()
-        bluetooth_layout.addWidget(self.class_entry)
+        self.classm_entry = QLineEdit()
+        bluetooth_layout.addWidget(self.classm_entry)
 
         update_button = QPushButton("Configurar")
         update_button.clicked.connect(self.update_bluetooth_config)
