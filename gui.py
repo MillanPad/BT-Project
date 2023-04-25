@@ -184,11 +184,9 @@ class BluetoothConfigurator(QWidget):
                 # Separar los datos del dispositivo en una lista de palabras
                 datos_dispositivo = texto.split("-")
                 palabras.extend(datos_dispositivo[1:]) # se omite el primer elemento "Dispositivo:"
-        print(palabras.pop(0))
-        print(palabras.pop(1))
-        print(palabras.pop(2))
-
-        #print(selected_items)
+        updateName.updateName(palabras.pop(0),palabras.pop(1),palabras.pop(2))
+        subprocess.run(["sudo", "service","bluetooth","restart"])
+        
     def agent_daemon(self):
         print("Ejecutar agente NoInputNoOutput como daemon")
         subprocess.run(["bt-agent", "-c","NoInputNoOutput","-d"])
