@@ -22,8 +22,9 @@ class BluetoothConfigurator(QWidget):
 
         self.tab_widget.addTab(self.conect_tab, "Connect")
         self.tab_widget.addTab(self.bluetooth_tab, "Configuracion")
-        self.tab_widget.addTab(self.message_tab, "Enviar mensaje(Mediante API)")
+        self.tab_widget.addTab(self.message_tab, "Descargar Mensajes")
         self.tab_widget.addTab(self.agendaTel_tab, "Descargar Agenda Telefonica")
+      
 
         # Organizar widgets de la pestaña Connect
         conect_layout = QVBoxLayout()
@@ -94,7 +95,8 @@ class BluetoothConfigurator(QWidget):
         self.table_entry = QLineEdit()
 
         descarga_button = QPushButton("Descargar Agenda Telefonica:")
-
+        self.bk_list = QListWidget()
+        conect_layout.addWidget(self.bk_list)
         agenda_layout.addWidget(address_targetTel_label)
         agenda_layout.addWidget(self.address_targetTel_entry)
         agenda_layout.addWidget(table_base)
